@@ -9,6 +9,9 @@ for vezes in range(nc):
 
   index = -1;
   while len(pessoas) > 1:
+    if k > len(pessoas):
+      k = k % len(pessoas)
+
     index = index + k
 
     while index >= len(pessoas):
