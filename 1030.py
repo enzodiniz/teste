@@ -13,14 +13,17 @@ class Node:
 class List:
   first = None
   last = None
+  size = 0
 
   def add(self, value):
     if self.first is None:
       self.first = Node(value)
       self.last = self.first
+      self.size = 1
     else :
       self.last.setProximo(Node(value))
       self.last = self.last.getProximo()
+      self.size = self.size + 1
 
   def kill(self, pulo, nodeInicial):
     # nodeZero = Node(-1)
@@ -28,6 +31,10 @@ class List:
 
     # current = nodeZero
     current = nodeInicial
+
+    if pulo > self.size:
+      pulo = pulo % self.size
+
     for i in range(pulo-1):
       current = current.getProximo()
 
@@ -50,42 +57,30 @@ class List:
       current = current.getProximo()
     print(str(current.value) + ' -> ' + str(current.getProximo().value))
 
-nc = int(input())    
+nc = int(input())
 
 for vezes in range(nc):
   numeroPessoas, k = [int (i) for i in input().split()]
 
-  lista = List()
+  pessoas = List()
   for i in range(numeroPessoas):
-    lista.add(i+1)
+    pessoas.add(i+1)
 
-  lista.last.setProximo(lista.first)
-  # print('last:', lista.last.value)
-  # print('last proximo:', lista.last.getProximo().value)
+  pessoas.last.setProximo(pessoas.first)
+  # print('last:', pessoas.last.value)
+  # print('last proximo:', pessoas.last.getProximo().value)
 
-  # lista.printAll()
+  # pessoas.printAll()
+
+  print('size: ', pessoas.size)
 
   nodeZero = Node(-1)
-  nodeZero.setProximo(lista.first)
+  nodeZero.setProximo(pessoas.first)
 
-  current = lista.kill(k, nodeZero)
+  current = pessoas.kill(k, nodeZero)
 
-  while lista.first != lista.last:
-    current = lista.kill(k, current)
+  while pessoas.first != pessoas.last:
+    current = pessoas.kill(k, current)
 
-  print(f'Case {vezes+1!s}: { lista.first.value!s} ')
-
-
-  # lista.printAll()
-
-  # index = -1;
-  # while len(pessoas) > 1:
-  #   index = index + k
-
-  #   while index >= len(pessoas):
-  #     index = index - len(pessoas)
-
-  #   pessoas.pop(index)
-  #   index = index - 1
-
-  # print(f'Case {vezes+1!s}: { pessoas[0]!s} ')
+  print(f'Case {vezes+1!s}: { pessoas.first.value!s} ')
+  
