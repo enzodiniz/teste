@@ -17,4 +17,4 @@ for vezes in range(nc):
     pessoas.pop(index)
     index = index - 1
 
-  print(f'Case {vezes+1!s}: { pessoas[0]!s} ')
+  print(f'Case {vezes+1!s}: { pessoas[0]!s}')
